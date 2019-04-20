@@ -1,0 +1,190 @@
+<div ng-controller="dataSelectController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                        <div class="card" style="margin-bottom: 10px">
+                            <div class="header">
+                                <h2><strong>数据选择</strong></h2>
+                                <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                            </div>
+                            <div class="body">
+                                <!--style="width: auto;height: 150px"-->
+                                <div id="jstree"  style=" margin: auto"></div>
+                                <!--<div id="jstree2" style=" margin: auto"></div>-->
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="header">
+                                <h2><strong>选择数据展示</strong></h2>
+                                <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                            </div>
+                            <div class="body table-responsive" >
+                                <!--style="width: auto;height: 325px"-->
+                                <div class="table-responsive">
+                                    <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                        <i class="zmdi zmdi-filter-list"></i>
+                                    </div>
+                                    <table id="data-table" ng-table="tableParams" show-filter="showFilter" class="table table-striped m-b-0">
+                                        <tr ng-repeat="item in $data">
+                                            <td data-title="'数据组名称'" sortabl class="text-center">{{item.datasetName}}</td>
+                                            <td data-title="'CSV名称'"  class="text-center">{{ item.csvName}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-primary waves-effect" style="float:right"  ng-click="toShow()" ><i class="fa fa-television"></i> 展示数据</button>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>图像选择</strong></h2>
+                            <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                        </div>
+                        <div class="body" style="width:auto;height:auto;">
+                            <div class="chart-list-panel">
+                                <div class="row">
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 20px">
+                                        <div class="chart" style="width: auto;height: auto" >
+                                            <div  class="chart" id="linetype" style="width: auto; height:auto;margin: auto">
+                                                <h6 class="chart-title"><strong>线型图</strong></h6>
+                                                <a href="javascript:void(0);">
+                                                    <img class="chart-area" height="210" width="350" ng-click="linechartSelected()" src="assets/images/linechart.png" data-original="assets/images/linechart.png" style="display: inline;" >
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--<div id="linechart"  style="width:550px; height: 250px; margin: auto"></div>-->
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 20px">
+                                        <div class="chart" style="width: auto;height: auto">
+                                            <!--<input type="checkbox" ng-model="floatchart" ng-checked="floatchart" ng-click="floatchartSelected()"/>-->
+
+                                            <div  class="chart" id="floattype" style="width: auto; height:auto;margin: auto">
+                                                <h6 class="chart-title"><strong>平面图</strong></h6>
+                                                <a href="javascript:void(0);">
+                                                    <img class="chart-area" height="210" width="350" ng-click="floatchartSelected()" src="assets/images/floatchart.png" data-original="assets/images/floatchart.png" style="display: inline;" >
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 20px">
+                                        <div class="chart" style="width: auto;height: auto" >
+                                            <!--<input type="checkbox" ng-model="cutchart" ng-checked="cutchart" ng-click="cutchartSelected()"/>-->
+
+                                            <div  class="chart" id="cuttype" style="width: auto; height:auto;margin: auto">
+                                                <h6 class="chart-title"><strong>截面图</strong></h6>
+                                                <a href="javascript:void(0);">
+                                                    <img class="chart-area" height="210" width="350" ng-click="cutchartSelected()" src="assets/images/cutchart.png" data-original="assets/images/cutchart.png" style="display: inline;" >
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 20px">
+                                        <div class="chart"style="width: auto;height: auto">
+                                            <!--<input type="checkbox" ng-model="threedchart" ng-checked="threedchart" ng-click="threedchartSelected()"/>-->
+
+                                            <div class="chart" id="threedtype" style="width: auto; height: auto ;margin: auto">
+                                                <h6 class="chart-title"><strong>3d图</strong></h6>
+                                                <a href="javascript:void(0);">
+
+                                                    <img class="chart-area" height="210" width="350" ng-click="threedchartSelected()" src="assets/images/3dchart.png" data-original="assets/images/3dchart.png" style="display: inline;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 col-md-6 col-sm-6" style="margin-bottom: 20px">
+                                        <div class="chart" style="width: auto;height: auto">
+                                            <!--<input type="checkbox" ng-model="threedchart" ng-checked="threedchart" ng-click="threedchartSelected()"/>-->
+
+                                            <div class="chart" id="radartype" style="width: auto; height: auto ;margin: auto">
+                                                <h6><strong>雷达图</strong></h6>
+                                                <a href="javascript:void(0);">
+                                                    <img class="chart-area"  height="210" width="350" ng-click="radarchartSelected()" src="assets/images/radarchart.png" data-original="assets/images/radarchart.png" style="display: inline;">
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="col-lg-6 col-md-12 col-sm-12">-->
+                    <!--<div class="card">-->
+                        <!--<div class="header">-->
+                            <!--<h2><strong>选择数据展示</strong></h2>-->
+                            <!--&lt;!&ndash; <div ng-include src="'template/headerDropdown.html'"></div> &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<div class="body" style="width: auto;height: 350px">-->
+                            <!--<div class="form-inline filter-option">-->
+                                <!--<div class="pull-right input-group-sm">-->
+                                    <!--&lt;!&ndash;<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建项目 </button>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+
+        <!--<div class="container-fluid">-->
+            <!--&lt;!&ndash; Basic Table &ndash;&gt;-->
+            <!--<div class="row clearfix">-->
+                <!--<div class="col-lg-6 col-md-12 col-sm-12">-->
+                    <!--<div class="card">-->
+                        <!--<div class="header">-->
+                            <!--<h2><strong>选择数据展示</strong></h2>-->
+                            <!--&lt;!&ndash; <div ng-include src="'template/headerDropdown.html'"></div> &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<div class="body">-->
+                            <!--<div class="form-inline filter-option">-->
+                                <!--<div class="pull-right input-group-sm">-->
+                                    <!--&lt;!&ndash;<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建项目 </button>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </section>
+    <!--<section class="content">-->
+        <!--<div ng-include src="'template/title.html'"></div>-->
+        <!--<div class="container-fluid">-->
+            <!--&lt;!&ndash; Basic Table &ndash;&gt;-->
+            <!--<div class="row clearfix">-->
+                <!--<div class="col-lg-12 col-md-12 col-sm-12">-->
+                    <!--<div class="card">-->
+                        <!--<div class="header">-->
+                            <!--<h2><strong>选择数据展示</strong></h2>-->
+                            <!--&lt;!&ndash; <div ng-include src="'template/headerDropdown.html'"></div> &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--<div class="body">-->
+                            <!--<div class="form-inline filter-option">-->
+                                <!--<div class="pull-right input-group-sm">-->
+                                    <!--&lt;!&ndash;<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建项目 </button>&ndash;&gt;-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</section>-->
+
+</div>

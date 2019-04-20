@@ -1,0 +1,111 @@
+﻿<div ng-controller="formController">
+    <ul class="nav nav-tabs nav-tabs-simple" ng-show="$editView.Tab != null">
+        <li ng-repeat="tab in $editView.Tabs" class="nav-item"><a ng-class="{ 'active': $index == 0 }" data-toggle="tab" data-target="{{ '#' + tab }}" href="javascript:void(0);">{{ tab }}</a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div ng-repeat="tab in $editView.Tabs" id="{{ tab }}" class="tab-pane fade" ng-class="{ 'active show': $index == 0 }">
+            <div class="form">
+                <div ng-repeat="column in $editView.tabColumns(tab)"
+                     ng-show="column.IsShow"
+                     ng-class="{
+                            'col-md-12': column.ColumnWidthKey == 'Column12',
+                            'col-md-6': column.ColumnWidthKey == 'Column6' || column.ColumnWidthKey == null,
+                            'col-md-4': column.ColumnWidthKey == 'Column4',
+                            'col-md-3': column.ColumnWidthKey == 'Column3',
+                            'col-md-2': column.ColumnWidthKey == 'Column2'}">
+                    <label class="header" ng-class="{ 'required': column.IsRequired }"><b>{{ column.Name }}：</b></label>
+                    <div class="form-group"
+                         ng-switch="column.ControlTypeKey"
+                         ng-class="{ 'has-danger': editForm[column.Code].$invalid && editForm[column.Code].$dirty }">
+                        <label ng-switch-when="Label">
+                            {{ $editView.show(column) }}
+                        </label>
+                        <input ng-switch-when="TextInput"
+                               type="text"
+                               name="{{ column.Code }}"
+                               ng-model="column.Value"
+                               class="form-control"
+                               ng-required="column.IsRequired"
+                               ng-maxlength="column.MaxLength"
+                               ng-pattern="column.Pattern"
+                               placeholder="{{ column.Description }}" />
+                        <input ng-switch-when="NumberInput"
+                               type="number"
+                               name="{{ column.Code }}"
+                               ng-model="column.Value"
+                               class="form-control"
+                               ng-required="column.IsRequired"
+                               ng-maxlength="column.MaxLength"
+                               max="{{ column.MaxValue }}"
+                               min="{{ column.MinValue }}"
+                               ng-pattern="column.Pattern"
+                               placeholder="{{ column.Description }}" />
+                        <select ng-switch-when="Select"
+                                name="{{ column.Code }}"
+                                ng-model="column.Value"
+                                class="form-control"
+                                ng-required="column.IsRequired"
+                                ng-options="item.ID as item.Name for item in column.DataSource"
+                                ng-change="$editView.onDataChange(column.Code)">
+                            <option value=""></option>
+                        </select>
+                        <div ng-switch-when="Date" class="input-group">
+                            <span class="input-group-prepend">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input ngc-datepicker
+                                   name="{{ column.Code }}"
+                                   ng-model="column.Value"
+                                   class="form-control width-150"
+                                   ng-required="column.IsRequired"
+                                   placeholder="{{ column.Description }}" />
+                        </div>
+                        <div ng-switch-when="Time" class="input-group">
+                            <span class="input-group-prepend">
+                                <i class="fa fa-clock-o"></i>
+                            </span>
+                            <input ngc-timepicker
+                                   name="{{ column.Code }}"
+                                   ng-model="column.Value"
+                                   class="form-control width-150"
+                                   ng-required="column.IsRequired"
+                                   placeholder="{{ column.Description }}" />
+                        </div>
+                        <div ng-switch-when="DateTime" class="input-group">
+                            <span class="input-group-prepend">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            <input ngc-datetimepicker
+                                   name="{{ column.Code }}"
+                                   ng-model="column.Value"
+                                   class="form-control width-200"
+                                   ng-required="column.IsRequired"
+                                   placeholder="{{ column.Description }}" />
+                        </div>
+                        <div ng-switch-when="Check" class="checkbox">
+                            <input id="{{ column.ID }}"
+                                   type="checkbox"
+                                   ng-model="column.Value">
+                            <label for="{{ column.ID }}">{{ column.Description }}&nbsp;</label>
+                        </div>
+                        <div ng-switch-when="Radio" class="form-check-inline">
+                            <div ng-repeat="item in column.DataSource" class="radio">
+                                <input id="{{ column.ID + '_' + item.ID }}"
+                                       name="{{ column.ID }}"
+                                       type="radio"
+                                       ng-model="column.Value"
+                                       ng-value="item.ID"
+                                       ng-required="column.IsRequired"
+                                       ng-change="$editView.onDataChange(column.Code)">
+                                <label for="{{ column.ID + '_' + item.ID }}">
+                                    {{ item.Name }}&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

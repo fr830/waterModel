@@ -1,0 +1,382 @@
+<div ng-controller="myProjectController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>项目列表</strong></h2>
+                            <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                        </div>
+                        <div class="body">
+                            <div class="form-inline filter-option">
+                                <div class="pull-right input-group-sm">
+                                    <input type="text" ng-model="filter.ProjectName" class="form-control input-sm" placeholder="项目名称模糊检索" /><!--过滤器没有写-->
+                                    <button class="btn btn-sm waves-effect btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                    <button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建项目 </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+<!--                                 <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                    <i class="zmdi zmdi-filter-list"></i>
+                                </div> -->
+                                <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>
+                                        <td data-title="'项目编号'" class="text-center">{{ item.ProjectCode }}</td>
+                                        <td data-title="'项目名称'"  class="text-center">{{ item.ProjectName }}</td>
+                                        <td data-title="'创建/最后修改时间'"  class="text-center">{{ item.UpdateTime|date:"yyyy-MM-dd HH:mm" }}</td>
+                                        <td data-title="'开始日期'"  class="text-center">{{ item.StartTime| limitTo:10 }}</td>
+                                        <td data-title="'结束日期'"  class="text-center">{{ item.EndTime| limitTo:10  }}</td>
+                                        <td data-title="'负责人'"  class="text-center">{{ item.UserName }}</td>
+                                        <td class="text-center width-100 text-nowrap">
+                                        <button class="btn btn-xs waves-effect btn-primary" ng-click="info(item)" title="查看信息"><i class="fa fa-search"></i></button>
+                                             <!-- <button class="btn btn-xs waves-effect btn-primary" ng-click="edit(item)" title="修改项目"><i class="fa fa-edit"></i></button>
+                                             <button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除项目"><i class="fa fa-trash-o"></i></button> -->
+                                        </td>
+                                         <!--<td class="text-center width-100 text-nowrap">-->
+                                             <!---->
+                                         <!--</td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-edit1" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">新增项目</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editForm" novalidate>
+                        <div class="form">
+                            <!-- <div  class="col-md-6">
+                                <label><b>项目编号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ProjectCode" class="form-control" disabled="" />
+                                </div>
+                            </div> -->
+                            <div  class="col-md-6">
+                                <label><b style="font-size: smaller;color: #bb0000">*</b></label>
+                                <label><b>项目名称：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.project" class="form-control" placeholder="请输入项目名称，必填项" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b style="font-size: smaller;color: #bb0000">*</b></label>
+                                <label><b>项目负责人：</b></label>
+                                <div class="form-group">
+                                    <select ng-model="model.leader" ng-options="item.user.UserId as item.user.UserName for item in userList " class="form-control" >
+                                    <option value='' disabled selected style='display:none;'>请选择负责人，必填项</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <label><b>公司：</b></label>
+                                <div class="form-group">
+                                    <select ng-model="model.company" ng-options="" class="form-control"></select>
+                                </div>
+                            </div> -->
+                            <div class="col-md-6">
+                                <label><b>开始时间：</b></label>
+                                <div class="form-group">
+                                    <input type="date" ng-model="model.StartTime" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>结束时间：</b></label>
+                                <div class="form-group">
+                                    <input type="date" ng-model="model.EndTime" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b style="font-size: smaller;color: #bb0000">*</b></label>
+                                <label><b>公司：</b></label>
+                                <div class="form-group">
+                                        <select ng-model="model.CompanyId" ng-options="item.CompanyId as item.CompanyName for item in Companys" class="form-control">
+                                        <option value='' disabled selected style='display:none;'>请选择公司，必填项</option>
+                                        </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label><b>简介：</b></label>
+                                <div class="form-group">
+                                    <!--<input type="text" ng-model="model.description" class="form-control" />-->
+                                    <textarea ng-model="model.description" class="form-control" rows="5" cols="15"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>是否有子项目：</b></label>
+                                <input type="checkbox" ng-model="model.HasSon" ng-init="HasSon=false"/>
+                                <label><b style="font-size: smaller;color: #bb0000">*此项选中后无法修改</b></label>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <label><b>水深颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.deepthcolorS" id="deepthcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.deepthcolorE" id="deepthcolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>水温颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.temperaturecolorS" id="temperaturecolorS" class="form-control" />
+                                    <input type="text" ng-model="model.temperaturecolorE" id="temperaturecolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>ECuS颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ECuScolorS" id="ECuScolorS" class="form-control" />
+                                    <input type="text" ng-model="model.ECuScolorE" id="ECuScolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>DOmg颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.DOmgcolorS" id="DOmgcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.DOmgScolorE" id="DOmgcolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>Sal颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.SalcolorS" id="SalcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.SalcolorE" id="SalcolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>pH颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.pHcolorS" id="pHcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.pHcolorE" id="pHcolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>ORP颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ORPcolorS" id="ORPcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.ORPcolorE" id="ORPcolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>Chla颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ChlacolorS" id="ChlacolorS" class="form-control" />
+                                    <input type="text" ng-model="model.ChlacolorE" id="ChlacolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>浊度颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.turbiditycolorS" id="turbiditycolorS" class="form-control" />
+                                    <input type="text" ng-model="model.turbiditycolorE" id="turbiditycolorE" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>饱和颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.saturatedcolorS" id="saturatedcolorS" class="form-control" />
+                                    <input type="text" ng-model="model.saturatedcolorE" id="saturatedcolorE" class="form-control" />
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit2">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">修改项目</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editForm" novalidate>
+                        <div class="form">
+                            <div  class="col-md-6">
+                                <label><b>项目编号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ProjectCode" class="form-control" disabled="" />
+                                </div>
+                            </div>
+                            <div  class="col-md-6">
+                                <label><b>项目名称：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.project" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>项目负责人：</b></label>
+                                <div class="form-group">
+                                    <select ng-model="model.leader" ng-options="item.user.UserId as item.user.Name for item in userList " class="form-control" ></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>开始时间：</b></label>
+                                <div class="form-group">
+                                    <input type="date" ng-model="model.StartTime" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>结束时间：</b></label>
+                                <div class="form-group">
+                                    <input type="date" ng-model="model.EndTime" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>水深颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.deepthcolorS" id="deepthcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.deepthcolorE" id="deepthcolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>水温颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.temperaturecolorS" id="temperaturecolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.temperaturecolorE" id="temperaturecolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>ECuS颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ECuScolorS" id="ECuScolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.ECuScolorE" id="ECuScolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>DOmg颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.DOmgcolorS" id="DOmgcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.DOmgScolorE" id="DOmgcolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>Sal颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.SalcolorS" id="SalcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.SalcolorE" id="SalcolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>pH颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.pHcolorS" id="pHcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.pHcolorE" id="pHcolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>ORP颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ORPcolorS" id="ORPcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.ORPcolorE" id="ORPcolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>Chla颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ChlacolorS" id="ChlacolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.ChlacolorE" id="ChlacolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>浊度颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.turbiditycolorS" id="turbiditycolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.turbiditycolorE" id="turbiditycolorE1" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>饱和颜色：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.saturatedcolorS" id="saturatedcolorS1" class="form-control" />
+                                    <input type="text" ng-model="model.saturatedcolorE" id="saturatedcolorE1" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit3">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">项目信息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editForm" novalidate>
+                        <div class="form">
+                            <div  class="col-md-6">
+                                <label><b>项目编号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ProjectCode" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div  class="col-md-6">
+                                <label><b>项目名称：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.project" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>项目负责人：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.leader"  class="form-control" readonly></input>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>公司：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.company"  class="form-control" readonly></input>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>开始时间：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.StartTimeS" class="form-control" readonly/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>结束时间：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.EndTimeS" class="form-control" readonly/>
+                                </div>
+                            </div>
+                             <div class="col-md-12">
+                                <label><b>简介：</b></label>
+                                <div class="form-group">
+                                    <!--<input type="text" ng-model="model.description" class="form-control" readonly />-->
+                                    <textarea ng-model="model.description" class="form-control" rows="5" cols="15"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

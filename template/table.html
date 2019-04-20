@@ -1,0 +1,25 @@
+﻿<div class="table-responsive" ng-controller="tableController">
+    <div class="filter-toggle" ng-click="showFilter = !showFilter">
+        <i class="zmdi zmdi-filter-list"></i>
+    </div>
+    <table ng-table-dynamic="tableParams with columns" show-filter="showFilter" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+        <tr ng-repeat="row in $data" ng-init="row.$index = $index">
+            <td ng-repeat="column in $columns"
+                ng-switch="column.type"
+                ng-class="{
+                    'width-50': column.type == 'check' || column.type == 'sn',
+                    'width-100': column.type == 'command',
+                    'text-left': column.align == 'Left',
+                    'text-center': column.align == 'Center',
+                    'text-right': column.align == 'Right'
+                }">
+                <div ng-switch-default>{{ $queryView.show(column.setting, row) }}</div>
+                <div ng-switch-when="check"><input type="checkbox" ng-model="row.checked" /></div>
+                <div ng-switch-when="sn">{{ tableParams.count() * (tableParams.page() - 1) + row.$index + 1 }}</div>
+                <div ng-switch-when="command">
+                    <button ng-repeat="cmd in commands" class="btn btn-xs waves-effect" ng-class="cmd.css" title="{{ cmd.title}}" ng-click="cmd.onClick(row)"><i class="fa" ng-class="cmd.icon"></i></button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

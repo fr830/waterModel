@@ -1,0 +1,78 @@
+﻿<!doctype html>
+<html lang="en" ng-app="waterModel">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <title data-ng-bind="setting.title + ' | ' + $state.current.data.pageTitle"></title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="node_modules/pace-progress/themes/orange/pace-theme-minimal.css">
+    <link rel="stylesheet" href="node_modules/ng-table/bundles/ng-table.min.css" />
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" />
+   <!--  <link rel="stylesheet" href="node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" /> -->
+    <link rel="stylesheet" href="node_modules/sweetalert2/dist/sweetalert2.min.css" />
+    <link rel="stylesheet" href="assets/fonts/material-icons.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/app_local.css">
+    <link rel="stylesheet" href="assets/css/color_skins.css">
+    <link rel='stylesheet' href="assets/css/spectrum.css" />
+    <link rel="stylesheet" href="node_modules/jstree/dist/themes/default-dark/style.css" />
+    <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css" />
+    <link  rel="stylesheet" href="assets/css/styleDrag.css">
+    <link rel="stylesheet" href="assets/css/color_skins.css">
+
+    <script type="text/javascript" src="assets/js/directive/echarts.js"></script>
+    <script type="text/javascript" src="assets/js/directive/echarts.min.js"></script>
+    <script src="node_modules/pace-progress/pace.min.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular/angular-messages.min.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="node_modules/restangular/dist/restangular.min.js"></script>
+    <script src="node_modules/ng-table/bundles/ng-table.min.js"></script>
+    <script src="node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="node_modules/ng-file-upload/dist/ng-file-upload.min.js"></script>
+</head>
+<body class="theme-blue">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img class="zmdi-hc-spin" src="assets/images/logo.svg" width="64" height="64"></div>
+        </div>
+    </div>
+    <div ui-view></div>
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=dgEHcP88uc8TNolGapL9ymupTSAtIeZg&services=&t=20180629105709"></script>
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="node_modules/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="node_modules/node-waves/dist/waves.min.js"></script>
+    <script src="node_modules/screenfull/dist/screenfull.js"></script>
+    <script src="node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script src="node_modules/file-saver/FileSaver.min.js"></script>
+    <script src="node_modules/echarts/dist/echarts.min.js"></script>
+    <!-- <script src="node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script> -->
+    <script src="node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="assets/js/directive/spectrum.js"></script>
+    <script src="assets/js/directive/jstree.js"></script>
+    <script src="assets/js/directive/dnd.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/directive/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src="assets/js/directive/drag.js"></script> -->
+    <!-- ================== END BASE JS ================== -->
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="assets/js/angular-app.js"></script>
+    <script src="assets/js/angular-router.js"></script>
+    <script src="assets/js/angular-service.js"></script>
+    <script src="assets/js/angular-directive.js"></script>
+    <script src="assets/js/angular-filter.js"></script>
+    <script src="assets/js/angular-controller.js"></script>
+    <script src="assets/js/angular-setting.js"></script>
+    <script src="config.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+</body>
+</html>

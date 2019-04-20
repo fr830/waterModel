@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/app_local.css">
+<div class="authentication sidebar-collapse" ng-controller="loginController">
+    <!-- End Navbar -->
+    <div class="page-header">
+        <div class="page-header-image" style="background-image:url(assets/images/login.jpg)"></div>
+        <div class="container">
+            <div class="col-md-12 content-center">
+                <div class="card-plain">
+                    <ng-form name="loginForm" novalidate>
+                        <div class="header">
+                            <div class="logo-container">
+                                <img src="assets/images/logo2.png" alt="">
+                            </div>
+                            <h5>安全管家</h5>
+                        </div>
+                        <div class="content">
+                            <div class="input-group input-lg">
+                                <input type="text" ng-model="loginRequest.Account" ng-keyup="login($event)" class="form-control" autocomplete="new-password" required placeholder="请输入账号">
+                                <span class="input-group-prepend">
+                                    <i class="zmdi zmdi-account-circle"></i>
+                                </span>
+                            </div>
+                            <div class="input-group input-lg">
+                                <input type="password" ng-model="loginRequest.Password" ng-keyup="login($event)" class="form-control" autocomplete="new-password" required placeholder="密码" />
+                                <span class="input-group-prepend">
+                                    <i class="zmdi zmdi-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="footer text-center">
+                            <button type="submit" ng-click="login()" class="btn btn-primary btn-round btn-lg btn-block">登录</button>
+                        </div>
+                    </ng-form>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <nav>
+                    <ul>
+                        <li><a href="http://www.elite-tree.com/contact.shtml" target="_blank">联系我们</a></li>
+                        <li><a href="http://www.elite-tree.com/knowledge1/service11.shtml" target="_blank">关于我们</a></li>
+                    </ul>
+                </nav>
+                <div class="copyright">
+                    &copy; 2018,
+                    <span>Powered by <a href="http://www.elite-tree.com" target="_blank">汇检菁英</a></span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

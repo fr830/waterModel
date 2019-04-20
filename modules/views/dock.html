@@ -1,0 +1,29 @@
+﻿<div ng-controller="dockController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>{{ $queryView.Name }}</strong> {{ $queryView.Description }}</h2>
+                            <div ng-include src="'template/headerDropdown.html'"></div>
+                        </div>
+                        <div class="body">
+                            <div class="form-inline filter-option">
+                                <div class="pull-right input-group-sm">
+                                    <input type="text" ng-model="filter.keyword" class="form-control input-sm" placeholder="关键词" />
+                                    <button class="btn btn-sm waves-effect btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                    <button class="btn btn-sm waves-effect btn-primary" ng-click="edit()"><i class="fa fa-plus-circle"></i> 新增</button>
+                                </div>
+                            </div>
+                            <div ng-include="'template/table.html'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-edit" ng-include="'template/modalForm.html'"></div>
+</div>

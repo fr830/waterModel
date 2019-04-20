@@ -1,0 +1,345 @@
+<div ng-controller="dataViewController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>菜单信息</strong> plant information</h2>
+                            <div ng-include src="'template/headerDropdown.html'"></div>
+                        </div>
+                        <div class="body">
+                            <div class="form-inline filter-option">
+                                <div class="pull-right input-group-sm">
+                                    <input type="text" ng-model="filter.keyword" class="form-control input-sm" placeholder="关键词" />
+                                    <button class="btn btn-sm waves-effect btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                    <button class="btn btn-sm waves-effect btn-primary" ng-click="edit()"><i class="fa fa-plus-circle"></i> 新增</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                    <i class="zmdi zmdi-filter-list"></i>
+                                </div>
+                                <table id="data-table" ng-table="tableParams" show-filter="showFilter" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>
+                                        <td data-title="'模型'" sortable="'model'" class="text-center">{{ item.Model }}</td>
+                                        <td data-title="'代码'" sortable="'Code'" class="text-center">{{ item.Code }}</td>
+                                        <td data-title="'菜单名'" sortable="'Name'" class="text-center">{{ item.Name }}</td>
+                                        <td data-title="'默认排序'" sortable="'Sorting'" class="text-center">{{ item.Sorting }}</td>
+                                        <td data-title="'视图类型'" sortable="'ViewType'" class="text-center">{{ item.ViewTypeDesc }}</td>
+                                        <td class="text-center width-100 text-nowrap">
+                                            <button class="btn btn-xs waves-effect btn-primary" ng-click="edit(item)" title="编辑"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-xs waves-effect btn-primary" ng-click="showItem(item)" title="字段"><i class="fa fa-bars"></i> </button>
+                                            <button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除"><i class="fa fa-trash-o"></i> </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="title">菜单信息</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <ng-form name="editForm" novalidate>
+                            <div class="form">
+                                <div  class="col-md-6">
+                                    <label><b>模型：</b></label>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="model.Model" class="form-control" />
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label><b>代码：</b></label>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="model.Code" class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label><b>菜单名：</b></label>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="model.Name" class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label><b>菜单描述：</b></label>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="model.Description" class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label><b>默认排序：</b></label>
+                                    <div class="form-group">
+                                        <input type="text" ng-model="model.Sorting" class="form-control" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label><b>视图类型：</b></label>
+                                    <div class="form-group">
+                                        <select ng-model="model.ViewType" ng-options="item.ID as item.Name for item in viewType" class="form-control"></select>
+
+                                    </div>
+                                </div>
+                                
+                                
+                            </div>
+                        </ng-form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>
+                    </div>
+                        
+</div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-items">
+        <div class="modal-dialog width-1000" >
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="title">菜单明细</h4>
+                        <h6 class="sub-title">menuDetail</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-inline filter-option">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <input type="text" ng-model="filterItem.keyword" class="form-control input-sm" placeholder="关键词" />
+                                        <button class="btn btn-sm btn-info" ng-click="reflashseqItem()"><i class="fa fa-search"></i> 筛选</button>
+                                        <button class="btn btn-sm btn-info" ng-click="editItem()"><i class="fa fa-plus-circle"></i> 新增</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="scroll">
+                            <div class="table-responsive">
+                                <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                    <i class="zmdi zmdi-filter-list"></i>
+                                </div>
+                                <table id="data-table" ng-table="tableItem" show-filter="showFilter" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'模型'" class="text-center">{{ item.Code }}</td>
+                                        <td data-title="'字段名'" class="text-center">{{ item.Name}}</td>
+                                        <td data-title="'对齐方式'" class="text-center">{{ item.AlignDesc}}</td>
+                                        <td data-title="'最大长度'" class="text-center" ng-if="filterItem.Type==20">{{ item.MaxLength}}</td>
+                                        <td data-title="'正则表达式'" class="text-center" ng-if="filterItem.Type==20">{{ item.Pattern}}</td>
+                                        <td data-title="'是否必填'" class="text-center" ng-if="filterItem.Type==20"><i ng-show="item.IsRequired" class="fa fa-lg fa-check-circle-o text-success"></i><i ng-show="!item.IsRequired" class="fa fa-lg fa-ban text-danger"></i></td>
+                                        <td data-title="'是否显示'" class="text-center" ng-if="filterItem.Type==20"><i ng-show="item.IsShow" class="fa fa-lg fa-check-circle-o text-success"></i><i ng-show="!item.IsShow" class="fa fa-lg fa-ban text-danger"></i></td>
+                                        <td data-title="'是否整行'" class="text-center" ng-if="filterItem.Type==20"><i ng-show="item.IsFullLine" class="fa fa-lg fa-check-circle-o text-success"></i><i ng-show="!item.IsFullLine" class="fa fa-lg fa-ban text-danger"></i></td>
+                                        <td data-title="'数据源'" class="text-center" ng-if="filterItem.Type==20">{{ item.Source}}</td>
+                                        <td data-title="'参数'" class="text-center" ng-if="filterItem.Type==20">{{ item.Param}}</td>
+                                        <td data-title="'TriggerCode'" class="text-center" ng-if="filterItem.Type==20">{{ item.TriggerCode}}</td>
+                                        <td data-title="'顺序号'" class="text-center">{{ item.OrderNo}}</td>
+                                        <td class="text-center width-100 text-nowrap">
+                                            <button class="btn btn-success btn-xs" ng-click="editItem(item)" title="编辑"><i class="fa fa-edit"></i></button>
+                                            <button class="btn btn-danger btn-xs" ng-click="removeItem(item)" title="删除"><i class="fa fa-trash-o"></i> </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-sm btn-white" data-dismiss="modal"><i class="fa fa-share-square-o"></i> 关闭</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-editItem">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">字段明细</h4>
+                    <h6 class="sub-title">fieldDetail</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editDetailForm" novalidate>
+                        <div class="form">
+                            <div class="col-md-6">
+                                <label ng-class="{'required':true}"><b>代码：</b></label>
+                                <div class="form-group" ng-class="{'has-danger':editDetailForm.Code.$invalid && !editForm.Code.$pristine}">
+                                    <input type="text" name="Code"ng-model="modelItem.Code" class="form-control" required/>
+
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label ng-class="{'required':true}"><b>动作名：</b></label>
+                                <div class="form-group"  ng-class="{'has-danger':editDetailForm.Name.$invalid && !editForm.Name.$pristine}">
+                                    <input type="text" name="Name"ng-model="modelItem.Name" class="form-control" required/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>对齐方式：</b></label>
+                                <div class="form-group">
+                                    
+                                    <div ng-repeat="item in align">
+                                        <div class="radio" style="float:left">
+                                            <input id="{{ item.ID }}"  type="radio" ng-model="modelItem.Align" value="{{item.ID}}">
+                                            <label for="{{item.ID}}">
+                                                {{item.Name}}&nbsp;
+                                            </label>
+                                        </div>
+                                    </div>
+                                  
+                                       
+                                   
+
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6" ng-show="filterItem.Type==20" ng-class="{'has-danger':editDetailForm.ControlType.$invalid && !editForm.ControlType.$pristine}">
+                                <label ng-class="{'required':true}"><b>控件类型：</b></label>
+                                <div class="form-group">
+                                   <select name="ControlType"ng-model="modelItem.ControlType" ng-options="item.ID as item.Name for item in controlType" class="form-control" ng-required="filterItem.Type==20"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20" ng-class="{'has-danger':editDetailForm.ColumnWidth.$invalid && !editForm.ColumnWidth.$pristine}">
+                                <label ng-class="{'required':true}"><b>栏位宽度：</b></label>
+                                <div class="form-group">
+                                    <select name="ColumnWidth" ng-model="modelItem.ColumnWidth" ng-options="item.ID as item.Name for item in columnWidth" class="form-control" ng-required="filterItem.Type==20"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>最大长度：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.MaxLength" class="form-control" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>最大值：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.MaxValue" class="form-control" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>最小值：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.MinValue" class="form-control" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>正则表达式：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.Pattern" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>是否必填：</b></label>
+                                
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input id="checkbox1" name="IsRequired" type="checkbox" ng-model="modelItem.IsRequired">
+                                        <label for="checkbox1">&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>是否显示：</b></label>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input id="checkbox2" name="IsShow" type="checkbox" ng-model="modelItem.IsShow">
+                                        <label for="checkbox2">&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>是否整行：</b></label>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <input id="checkbox3" name="IsFullLine" type="checkbox" ng-model="modelItem.IsFullLine">
+                                        <label for="checkbox3">&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>默认源：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.DefaultValue" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>说明：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.Description" class="form-control" />
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>数据源：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.Source" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>数据源显示列名：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.SourceDisplayCode" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-show="filterItem.Type==20">
+                                <label><b>参数：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.Param" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>显示格式：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.DisplayFormat" class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6" >
+                                <label><b>顺序号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="modelItem.OrderNo" class="form-control" onkeypress="return event.keyCode>=48&&event.keyCode<=57" ng-pattern="/[^a-zA-Z]/"/>
+
+                                </div>
+                            </div>
+                           
+                            
+                            
+                        </div>
+                    </ng-form>
+                </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary waves-effect" ng-click="saveItem()" ng-disabled="editDetailForm.$invalid"><i class="fa fa-save"></i> 保存</button>
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>

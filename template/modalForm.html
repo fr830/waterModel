@@ -1,0 +1,27 @@
+﻿<div class="modal fade" id="{{ id }}" ng-controller="modalFormController">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="title">{{ $editView.Name }}</h4>
+                <h6 class="sub-title">{{ $editView.Description }}</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <ng-form name="editForm" novalidate>
+                    <div ng-include="'template/form.html'"></div>
+                </ng-form>
+            </div>
+            <div class="modal-footer">
+                <button ng-repeat="cmd in commands"
+                        type="button"
+                        class="btn waves-effect"
+                        ng-if="!cmd.disableNew && !model.ID || !cmd.disableEdit && model.ID"
+                        ng-class="cmd.css"
+                        ng-click="cmd.onClick()"
+                        ng-disabled="cmd.isValidate && editForm.$invalid">
+                    <i class="fa fa-save"></i> {{ cmd.title}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

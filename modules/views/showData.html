@@ -1,0 +1,243 @@
+<div ng-controller="showDataController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>选择项目</strong></h2>
+                            <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                        </div>
+                        <div class="body">
+                            <div class="form-inline filter-option">
+                                <div class="pull-right input-group-sm">
+                                    <!--<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建项目 </button>-->
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+ <!--                                <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                    <i class="zmdi zmdi-filter-list"></i>
+                                </div> -->
+                                <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>
+                                        <td data-title="'项目编号'"  class="text-center">{{ item.ProjectCode }}</td>
+                                        <td data-title="'项目名称'"  class="text-center">{{ item.ProjectName }}</td>
+                                        <td data-title="'开始时间'"  class="text-center">{{ item.StartTime| limitTo:10 }}</td>
+                                         <td data-title="'结束时间'"  class="text-center">{{ item.EndTime| limitTo:10  }}</td>
+                                         <td data-title="'负责人'"  class="text-center">{{ item.UserName }}</td>
+                                        <td class="text-center width-100 text-nowrap">
+                                            <button class="btn btn-xs waves-effect btn-primary" ng-click="jump(item)" title="查看项目"><i class="fa fa-search"></i></button>
+
+                                            <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="dataManager(item)" title="数组查看" ng-show="judgeShow(item)"><i class="fa fa-database"></i></button>-->
+                                            <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="infoSon(item)" title="查看子项目" ng-show="item.HasSon"><i class="fa fa-product-hunt"></i></button>-->
+                                            <!--<button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除项目"><i class="fa fa-trash-o"></i></button>-->
+                                        </td>
+                                        <!--<td class="text-center width-100 text-nowrap">-->
+                                        <!---->
+                                        <!--</td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-sonProjectsedit" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">子项目列表</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="data-sontable" class="table table-striped m-b-0">
+
+                        <tr ng-repeat="item in subProjects">
+                            <!--<td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>-->
+                            <td data-title="'项目编号'"  class="text-center">{{ item.ProjectCode }}</td>
+                            <td data-title="'项目名称'"  class="text-center">{{ item.ProjectName }}</td>
+                            <td class="text-center width-100 text-nowrap">
+                                <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="info(item)" title="查看项目"><i class="fa fa-search"></i></button>-->
+
+                                <button class="btn btn-xs waves-effect btn-primary" ng-click="dataManager(item)" title="数组查看" ><i class="fa fa-database"></i></button>
+                                <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="infoSon(item)" title="查看子项目" ng-show="item.HasSon"><i class="fa fa-table"></i></button>-->
+                                <!--<button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除项目"><i class="fa fa-trash-o"></i></button>-->
+                            </td>
+
+                    </table>
+
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="title">数据管理</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <!--<div class="form-inline filter-option">-->
+                        <!--<div class="pull-right input-group-sm">-->
+                            <!--<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建数据组 </button>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <table id="dataManager-table" ng-table="datasTable" show-filter="showFilter" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                        <tr ng-repeat="item in $data">
+                            <td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>
+                            <td data-title="'数据组编号'" sortable="'DataSetCode'" class="text-center">{{ item.DataSetCode }}</td>
+                            <td data-title="'数据组名字'" sortable="'DataSetName'" class="text-center">{{ item.DataSetName }}</td>
+                            <td data-title="'数据组天气'" sortable="'Weather'" class="text-center">{{ item.Weather }}</td>
+                            <td class="text-center width-100 text-nowrap">
+                                <button class="btn btn-xs waves-effect btn-primary" ng-click="toMap(item)" title="地图标定"><i class="fa fa-map-marker"></i></button>
+                                <!--<button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除数据组"><i class="fa fa-trash-o"></i></button>-->
+                                <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="upload(item)" title="上传数据" ng-show="judgeShow(item)"><i class="fa fa-upload"></i></button>-->
+                                <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="query(item)" title="查看数据组" ng-show="item.HasSon"><i class="fa fa-search"></i></button>-->
+
+                            </td>
+                            <!--<td class="text-center width-100 text-nowrap">-->
+                            <!---->
+                            <!--</td>-->
+                        </tr>
+                    </table>
+                </div>
+                <!--<div class="modal-footer">-->
+                <!--<button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>-->
+                <!--</div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="modal fade" id="modal-creatNew" aria-hidden="true" data-backdrop="static">-->
+        <!--<div class="modal-dialog modal-lg">-->
+            <!--<div class="modal-content">-->
+
+                <!--<div class="modal-header">-->
+                    <!--<h4 class="title">新建数据组</h4>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--&lt;!&ndash;<div class="form-inline filter-option">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="pull-right input-group-sm">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建数据组 </button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<ng-form name="editForm" novalidate>-->
+                        <!--<div class="form">-->
+                            <!--<div  class="col-md-6">-->
+                                <!--<label><b>数据组编号：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.DataSetCode" class="form-control" />-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div  class="col-md-6">-->
+                                <!--<label><b>数据组名称：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.DataSetName" class="form-control" />-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-6">-->
+                                <!--<label><b>天气：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.Weather"  class="form-control" ></input>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</ng-form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="modal fade" id="modal-editSet" aria-hidden="true" data-backdrop="static">-->
+        <!--<div class="modal-dialog modal-lg">-->
+            <!--<div class="modal-content">-->
+
+                <!--<div class="modal-header">-->
+                    <!--<h4 class="title">修改数据组</h4>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--&lt;!&ndash;<div class="form-inline filter-option">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="pull-right input-group-sm">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<button class="btn btn-sm waves-effect btn-primary" ng-click="edit()" ><i class="fa fa-plus-circle"></i> 新建数据组 </button>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<ng-form name="editForm" novalidate>-->
+                        <!--<div class="form">-->
+                            <!--<div  class="col-md-6">-->
+                                <!--<label><b>数据组编号：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.DataSetCode" class="form-control" />-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div  class="col-md-6">-->
+                                <!--<label><b>数据组名称：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.DataSetName" class="form-control" />-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-6">-->
+                                <!--<label><b>天气：</b></label>-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" ng-model="model.Weather"  class="form-control" ></input>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+                    <!--</ng-form>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="modal fade" id="modal-upload" aria-hidden="true" data-backdrop="static">-->
+        <!--<div class="modal-dialog modal-lg">-->
+            <!--<div class="modal-content">-->
+
+                <!--<div class="modal-header">-->
+                    <!--<h4 class="title">数据上传</h4>-->
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+                    <!--<div class="form-horizontal form-inline">-->
+                        <!--<div class="panel-body">-->
+                            <!--<div class="form-inline filter-option">-->
+                                <!--<form id="uoloadForm">-->
+                                    <!--<input type="file" name="file" id="fileName" style="margin-top: 9px" value="111"/>-->
+                                <!--</form>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="modal-footer">-->
+                    <!--<button type="submit" class="btn btn-primary waves-effect" ng-click="uploadFile()" ><i class="fa fa-save"></i> 保存</button>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+</div>

@@ -1,0 +1,183 @@
+<div ng-controller="companyManagerController">
+    <section class="content">
+        <div ng-include src="'template/title.html'"></div>
+        <div class="container-fluid">
+            <!-- Basic Table -->
+            <div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>公司信息</strong></h2>
+                            <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+                        </div>
+                        <div class="body">
+                            <div class="form-inline filter-option">
+                                <div class="pull-right input-group-sm">
+                                    <!--<input type="text" ng-model="filter.keyword" class="form-control input-sm" placeholder="关键词" />&lt;!&ndash;过滤器没有写&ndash;&gt;-->
+                                    <!--<button class="btn btn-sm waves-effect btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>-->
+                                    <input type="text" ng-model="filter.CompanyName" class="form-control input-sm" placeholder="公司名称模糊检索" /><!--过滤器没有写-->
+                                    <button class="btn btn-sm waves-effect btn-info" ng-click="reflash()"><i class="fa fa-search"></i> 筛选</button>
+                                    <button class="btn btn-sm waves-effect btn-primary" ng-click="edit()"><i class="fa fa-plus-circle"></i> 新增</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <div class="filter-toggle" ng-click="showFilter = !showFilter">
+                                    <i class="zmdi zmdi-filter-list"></i>
+                                </div>
+                                <table id="data-table" ng-table="tableParams" template-pagination="template/pagination.html" class="table table-striped m-b-0">
+                                    <tr ng-repeat="item in $data">
+                                        <td data-title="'序号'" class="text-center">{{ tableParams.count() * (tableParams.page() - 1) + $index + 1 }}</td>
+                                        <!--<td data-title="'模型'" sortable="'model'" class="text-center">{{ item.Model }}</td>-->
+                                        <td data-title="'公司名称'"  class="text-center">{{ item.CompanyName }}</td>
+                                        <td data-title="'法人姓名'"  class="text-center">{{ item.LegalPerson }}</td>
+                                        <td data-title="'电话'"  class="text-center">{{ item.Phone }}</td>
+                                        <td data-title="'地址'"  class="text-center">{{ item.Address }}</td>
+                                        <!--<td data-title="'密码'" sortable="'Code'" class="text-center">{{ item.Password }}</td>-->
+                                        <!--<td data-title="'默认排序'" sortable="'Sorting'" class="text-center">{{ item.Sorting }}</td>-->
+                                        <!--<td data-title="'角色'"  class="text-center">{{ item.userRole.RoleIdEntity.RoleName }}</td>-->
+                                        <td class="text-center width-100 text-nowrap">
+                                            <button  ng-if="item.Status==0" class="btn btn-xs waves-effect btn-primary" ng-click="edit(item)" title="信息修改"><i class="fa fa-edit"></i></button>
+                                            <!--<button class="btn btn-xs waves-effect btn-primary" ng-click="reset(item)" title="重置密码"><i class="fa fa-refresh"></i></button>-->
+                                            <button ng-if="item.Status==0" class="btn btn-xs waves-effect btn-warning" ng-click="freeze(item)" title="账户冻结"><i class="fa fa-ban"></i> </button>
+                                            <button ng-if="item.Status==1" class="btn btn-xs waves-effect btn-default" ng-click="freeze(item)" title="账户解冻"><i class="fa  fa-unlock-alt"></i> </button>
+                                            <!--<button class="btn btn-danger btn-xs" ng-click="remove(item)" title="删除"><i class="fa fa-trash-o"></i> </button>-->
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="modal fade" id="modal-edit1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">公司信息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editForm" vlidate="novalidate">
+                        <div class="form">
+
+                            <div  class="col-md-6">
+                                <label><b style="font-size: smaller;color: #bb0000">*</b></label>
+                                <label><b>公司名称：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.CompanyName" class="form-control" placeholder="输入公司名称，必填项" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <!--   <label><b style="font-size: smaller;color: #bb0000">*</b></label> -->
+                                <label><b>法人：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.LegalPerson" class="form-control" placeholder="输入法人姓名，可空"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <!--   <label><b style="font-size: smaller;color: #bb0000">*</b></label> -->
+                                <label><b>地址：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.Address" class="form-control" placeholder="输入公司地址，可空"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b style="font-size: smaller;color: #bb0000">*</b></label>
+                                <label><b>电话：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.Phone" ng-pattern="/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^0\d{2,3}-?\d{7,8}$/"  placeholder="输入用户手机号或电话：示例:13388888888" name="userTel" class="form-control" required/>
+<!--                                     <div  ng-messages="editForm.userTel.$error" ng-if="editForm.userTel.$touched">
+                                        <div ng-message="minlength">11位手机号</div>
+                                        <div ng-message="maxlength">11位手机号</div>
+                                        <div ng-message="required">不能为空</div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                               <!--  <label><b style="font-size: smaller;color: #bb0000">*</b></label> -->
+                                <label><b>营业执照号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.CompanyCode"  class="form-control" placeholder="输入营业执照号，可空" ng-pattern="/(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>公司业务范围：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ManageScope"  class="form-control" placeholder="输入公司业务范围，可空"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-edit2">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="title">公司信息</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                    <ng-form name="editForm"vlidate="novalidate" >
+                        <div class="form">
+
+                            <div  class="col-md-6">
+                                <label><b>公司名称：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.CompanyName" class="form-control" placeholder="输入公司名称，必填项" required />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>法人：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.LegalPerson" class="form-control"placeholder="输入法人姓名，可空" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>地址：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.Address" class="form-control" placeholder="输入公司地址，可空" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>电话：</b></label>
+                                <div class="form-group">
+                                   <input type="text" ng-model="model.Phone" ng-pattern="/^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\d{8}$|^0\d{2,3}-?\d{7,8}$/"   name="userTel" class="form-control"  placeholder="输入用户手机号或电话：示例:13388888888" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>营业执照号：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.CompanyCode"  placeholder="输入营业执照号，可空"  class="form-control" ng-pattern="/(^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$)|(^\d{15}$)/"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label><b>公司业务范围：</b></label>
+                                <div class="form-group">
+                                    <input type="text" ng-model="model.ManageScope" placeholder="输入公司业务范围，可空" class="form-control"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    </ng-form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary waves-effect" ng-click="save()" ><i class="fa fa-save"></i> 保存</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

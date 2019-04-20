@@ -1,0 +1,227 @@
+<!--将所有验证类型写在在一个文件里,需要验证的地方直接调用id即可-->
+<!-- <script type="text/ng-template" id="validation-username"> -->
+   <!-- <p ng-message="minlength" class="help-block">用户名最小长度5</p>
+    <p ng-message="maxlength" class="help-block">用户名最大长度10</p>-->
+<!--     <p ng-message-exp="['minlength', 'maxlength']" class="help-block" style="color: #e73d4a;">验证码长度6位</p>
+    <p ng-message="required"  class="help-block" style="color: #e73d4a;">验证码必填</p>
+
+</script> -->
+
+<script type="text/ng-template" id="validation-email">
+    <p ng-message="required" class="help-block">邮箱必填</p>
+    <p ng-message="minlength" class="help-block">邮箱最小长度5</p>
+    <p ng-message="maxlength" class="help-block">邮箱最大长度20</p>
+    <p ng-message="email" class="help-block">邮箱无效</p>
+</script>
+
+<script type="text/ng-template" id="validation-phone">
+    <p ng-message-exp="['minlength', 'maxlength']" class="help-block" style="color: #e73d4a;">手机号长度11位</p>
+    <p ng-message="required" class="help-block" style="color: #e73d4a;">手机必填</p>
+    <p ng-message="pattern" class="help-block" style="color: #e73d4a;">格式错误</p>
+</script>
+<!-- <script type="text/ng-template" id="validation-linkphone">
+    <p ng-message="required" class="help-block" style="color: #e73d4a;">手机必填</p>
+    <p ng-message="pattern" class="help-block" style="color: #e73d4a;">正确格式:080088888888或13888888888</p>
+</script>-->
+<script type="text/ng-template" id="validation-createNote">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="maxlength" class="help-block">最大长度30</p>
+</script>
+
+ <!-- <script type="text/ng-template" id="validation-textarea">
+    <p ng-message="required" class="help-block">必填项</p>
+</script> -->
+<script type="text/ng-template" id="validation-password">
+       <!--  <p ng-message-exp="['minlength', 'maxlength']" class="help-block" style="color: #e73d4a;">密码长度6-16</p> -->
+        <p ng-message="required" class="help-block" style="color: #e73d4a;">密码必填</p>
+        <!-- <p ng-message="pattern" class="help-block" style="color: #e73d4a;">密码格式错误(数字+字母)</p> -->
+</script>
+
+<script type="text/ng-template" id="validation-addEmployeeInfoUsername">
+    <p ng-message="required" class="help-block">姓名必填</p>
+    <p ng-message="pattern" class="help-block">只能是汉字和字母,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-penterpriseName">
+    <p ng-message="required" class="help-block">公司必填</p>
+    <p ng-message="pattern" class="help-block">只能是汉字和字母,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-deptName">
+    <p ng-message="required" class="help-block">部门必填</p>
+    <p ng-message="pattern" class="help-block">只能是汉字和字母,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-paddress">
+    <p ng-message="required" class="help-block">请填写详细地址</p>
+    <p ng-message="maxlength" class="help-block">最大长度40</p>
+</script>
+<script type="text/ng-template" id="validation-pphone">
+    <p ng-message="required" class="help-block">联系电话不能为空</p>
+    <p ng-message="pattern" class="help-block">11位有效的手机号码或座机号3/4位区号+6-8位电话,例：0571-88888888</p>
+</script>
+<script type="text/ng-template" id="validation-roleName">
+    <p ng-message="required" class="help-block">角色名必填</p>
+    <p ng-message="pattern" class="help-block">只能是汉字和字母,最多10个字符</p>
+</script>
+<script type="text/ng-template" id="validation-penterpriseName">
+    <p ng-message="required" class="help-block">公司必填</p>
+    <p ng-message="pattern" class="help-block">只能是汉字和字母,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-textValue">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">只能是汉字、字母和数字,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-numValue">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">只能是数字,最多10个字符</p>
+</script>
+<script type="text/ng-template" id="validation-bankCard">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">银行卡号格式错误</p>
+</script>
+<script type="text/ng-template" id="validation-bank">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">开户银行未输入</p>
+</script>
+
+<script type="text/ng-template" id="validation-numValue1">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">只能是数字,最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-IDCard">
+    <p ng-message="required" class="help-block">身份证是必须的</p>
+    <p ng-message="pattern" class="help-block">身份证号不合格</p>
+</script>
+<script type="text/ng-template" id="validation-type">
+    <p ng-message="required" class="help-block">必填项</p>
+</script>
+<script type="text/ng-template" id="validation-requiredValue">
+    <p ng-message="required" class="help-block">必填项</p>
+</script>
+<script type="text/ng-template" id="validation-score">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">请输入0-99之间的整数</p>
+</script>
+<script type="text/ng-template" id="validation-money">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">请输入正确格式如：100或100.00</p>
+</script>
+<script type="text/ng-template" id="validation-fundCode">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="maxlength" class="help-block">只能是数字,字母，最多20个字符</p>
+</script>
+<script type="text/ng-template" id="validation-fundInfo">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="maxlength" class="help-block">输入基金详情</p>
+</script>
+<script type="text/ng-template" id="validation-funprice">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">最多20位，可保留四位小数</p>
+</script>
+<script type="text/ng-template" id="validation-parentAuthId">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">只能是数字,最多11个字符</p>
+</script>
+<script type="text/ng-template" id="validation-authText">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="maxlength" class="help-block">最大长度64</p>
+</script>
+<!-- <script type="text/ng-template" id="validation-verifyCode">
+    <p ng-message="required" class="help-block">验证码必填</p>
+    <p ng-message="pattern" class="help-block">验证码长度6位</p>
+</script>
+
+<script type="text/ng-template" id="validation-IDCard">
+    <p ng-message="required" class="help-block">身份证是必须的</p>
+    <p ng-message="pattern" class="help-block">身份证号不合格</p>
+</script>
+ 完善企业信息/新增企业信息/修改企业信息 
+<script type="text/ng-template" id="validation-pbusinessLicense">
+    <p ng-message="required" class="help-block">执照编号不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-pendDate">
+    <p ng-message="required" class="help-block">到期日期必填且需大于当前日期</p>
+    <p ng-message="min" class="help-block">所选日期需大于当前日期</p>
+</script>-->
+<!-- 
+<script type="text/ng-template" id="validation-psubjectTrade">
+    <p ng-message="required" class="help-block">主体类型不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-plegalPerson">
+    <p ng-message="required" class="help-block">法人姓名不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-paddress">
+    <p ng-message="required" class="help-block">请选择地址并填写详细地址</p>
+    <p ng-message="pattern" class="help-block">最多输入40个汉字</p>
+</script>
+<script type="text/ng-template" id="validation-pdeptcode">
+    <p ng-message="required" class="help-block">所属辖区不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-psubjectTrade2">
+    <p ng-message="required" class="help-block">许可证类型不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-paddress2">
+    <p ng-message="required" class="help-block">请选择地址并填写详细地址</p>
+    <p ng-message="pattern" class="help-block">最多输入40个汉字</p>
+</script>
+<script type="text/ng-template" id="validation-paddress3">
+    <p ng-message="required" class="help-block">请选择地址并填写详细地址</p>
+    <p ng-message="pattern" class="help-block">最多输入40个汉字</p>
+</script>
+<script type="text/ng-template" id="validation-paddress4">
+    <p ng-message="required" class="help-block">请选择地址并填写详细地址</p>
+    <p ng-message="pattern" class="help-block">最多输入40个汉字</p>
+</script>
+<script type="text/ng-template" id="validation-pregistcertcode">
+    <p ng-message="required" class="help-block">许可证编号不能为空</p>
+    <p ng-message="pattern" class="help-block">由JY和14位阿拉伯数字组成</p>
+</script>
+<script type="text/ng-template" id="validation-pproductregistcertcode">
+    <p ng-message="required" class="help-block">证件编号不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-pfoodregistcertcode">
+    <p ng-message="required" class="help-block">餐饮许可证编号不能为空</p>
+    <p ng-message="pattern" class="help-block">由省、自治区、直辖市简称＋餐证字＋4位年份数＋6位行政区域代码＋6位行政区域发证顺序编号</p>
+</script>
+<script type="text/ng-template" id="validation-pendDate2">
+    <p ng-message="required" class="help-block">到期日期必填且需大于当前日期</p>
+    <p ng-message="min" class="help-block">所选日期需大于当前日期</p>
+</script>
+<script type="text/ng-template" id="validation-prange">
+    <p ng-message="required" class="help-block">许可范围不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-pbusinessmode">
+    <p ng-message="required" class="help-block">经营方式不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-editTransactionObInfo">
+    <p ng-message="required" class="help-block">不能为空</p>
+    <p ng-message-exp="['minlength', 'maxlength']" class="help-block">最多100个字符</p>
+    <p ng-message="pattern" class="help-block">格式错误,不能超过20</p>
+</script>
+<script type="text/ng-template" id="validation-editTransactionObInfoProduceAddress">
+    <p ng-message="required" class="help-block">不能为空</p>
+    <p ng-message-exp="['minlength', 'maxlength']" class="help-block">最多150个字符</p>
+</script>
+<script type="text/ng-template" id="validation-transactionObInfoModify">
+    <p ng-message="required" class="help-block">不能为空</p>
+    <p ng-message="pattern" class="help-block">格式错误或字数过多</p>
+</script>
+<script type="text/ng-template" id="validation-transactionObInfoType">
+    <p ng-message="required" class="help-block">类型不能为空</p>
+    <p ng-message="pattern" class="help-block">格式错误或字数过多</p>
+</script>
+<script type="text/ng-template" id="validation-transactionObInfoUnitType">
+    <p ng-message="required" class="help-block">请选择编号类型</p>
+    <p ng-message="pattern" class="help-block">格式错误或字数过多</p>
+</script>
+<script type="text/ng-template" id="validation-addEmployeeDate">
+    <p ng-message="required" class="help-block">日期不能为空</p>
+</script>
+<script type="text/ng-template" id="validation-transactionObInfoUnitTypeInput">
+    <p ng-message="required" class="help-block">请输入许可证编号或企业名称</p>
+    <p ng-message="pattern" class="help-block">格式错误或字数过多</p>
+</script>
+<script type="text/ng-template" id="validation-bank">
+    <p ng-message="required" class="help-block">必填项</p>
+    <p ng-message="pattern" class="help-block">银行账号格式错误</p>
+</script>
+
+

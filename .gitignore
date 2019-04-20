@@ -1,0 +1,4 @@
+# ignore directories and files
+node_modules
+assets/js/angular-controller.js
+assets/js/angular-service.js

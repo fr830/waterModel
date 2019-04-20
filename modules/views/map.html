@@ -1,0 +1,81 @@
+<div ng-controller="mapController">
+  <section class="content">
+    <div ng-include src="'template/title.html'"></div>
+    <div class="container-fluid">
+      <div class="row clearfix">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2><strong>选择数据展示</strong></h2>
+                                <!-- <div ng-include src="'template/headerDropdown.html'"></div> -->
+              </div>
+              <div class="body table-responsive" >
+                                <!--style="width: auto;height: 325px"-->
+                <div class="table-responsive">
+                  <button type="submit" class="btn btn-primary waves-effect" style="float:right"  ng-click="loadPicture()" ></i> 展示</button>
+                  <table id="data-table" ng-table="tableParams" class="table table-striped m-b-0">
+                      <tr ng-repeat="item in $data">
+                        <td data-title="'数据组id'" sortabl class="text-center">{{item}}</td>
+                        <td><input type="radio"  name="csv" value={{item}} class="text-center"></td>
+                      </tr>
+                  </table>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12">
+          <div class="card">
+            <div class="header">
+              <h2><strong>数据展示</strong></h2>
+            </div>
+            <div class="body" style="width:auto;height:auto;">
+              <ng-form name="editForm">
+              <div class="form-inline filter-option">
+                
+                    <button class="btn btn-xs waves-effect btn-primary" ng-click="showAll()">分别展示</button> 
+                
+                  <div class="pull-right input-group-sm">
+                    <span>x轴</span>
+                    <select ng-model="model.dataTypeX" ng-init="model.dataTypeX=DataTypes[9]" ng-options="DataType for DataType in DataTypes" ng-change="update()" ></select>
+                      <div ng-repeat="item in DataTypes" >
+
+                        <div > <input type="checkbox"  ng-checked="defult()" ng-click="isSelected(item,$event)" class="text-center"   text-nowrap>{{item}}</input></div>
+
+                      </div>
+                  </div>
+                </div>
+              </ng-form>
+              <div id="chartmain" style="width:600px; height: 400px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<!--   	<div class="modal-dialog modal-lg">
+  		<div class="modal-content">
+  			<div class="modal-header">
+                <h4 class="title">数据展示</h4>
+            </div>
+        	<div class="modal-body">
+        	<ng-form name="editForm">
+            	<div class="form-inline filter-option">
+            		
+                		<button class="btn btn-xs waves-effect btn-primary" ng-click="showAll()">分别展示</button> 
+                
+                	<div class="pull-right input-group-sm">
+                		<span>x轴</span>
+                		<select ng-model="model.dataTypeX" ng-init="model.dataTypeX=DataTypes[9]" ng-options="DataType for DataType in DataTypes" ng-change="update()" ></select>
+                    	<div ng-repeat="item in DataTypes" >
+
+                     		<div > <input type="checkbox"  ng-checked="defult()" ng-click="isSelected(item,$event)" class="text-center"   text-nowrap>{{item}}</input></div>
+
+                  		</div>
+                	</div>
+            	</div>
+            </ng-form>
+        		<div id="chartmain" style="width:600px; height: 400px;"></div>
+         	</div>
+    	</div>
+	</div> -->
+</div>

@@ -1,0 +1,640 @@
+.theme-purple .menu > ul > li > ul.normal-sub > li a:hover, .theme-purple .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #8c99e0;
+}
+
+.theme-purple.sidebar-collapse .navbar-collapse:before {
+    background-color: #6572b8;
+}
+
+.theme-purple .btn-primary {
+    background: #6572b8;
+}
+
+    .theme-purple .btn-primary:active, .theme-purple .btn-primary:hover, .theme-purple .btn-primary:focus {
+        background: #8c99e0;
+    }
+
+    .theme-purple .btn-primary.btn-simple {
+        border-color: #6572b8;
+        color: #6572b8;
+        background: transparent;
+    }
+
+.theme-purple .block-header h2 {
+    color: #fff;
+}
+
+    .theme-purple .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-purple section.content:before {
+    background-color: #8c99e0;
+}
+
+.theme-purple .navbar {
+    background: #fff;
+}
+
+.theme-purple .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-purple .bars {
+    color: #fff;
+}
+
+.theme-purple .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+
+    .theme-purple .sidebar .menu .list li.active > a {
+        color: #bcd400;
+    }
+
+.theme-purple .sidebar .menu .list > li.active > a {
+    color: #fff;
+    background-color: #6572b8;
+}
+
+.theme-purple .sidebar .menu .list a:hover {
+    color: #6572b8;
+}
+
+.theme-purple .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #6572b8;
+}
+
+.theme-purple .nav-tabs .nav-link.active {
+    border: 1px solid #6572b8 !important;
+}
+
+.theme-purple .nav-tabs-simple > li > a:after {
+    background-color: #8c99e0;
+}
+
+.theme-purple .card .header h2:before, .theme-purple .modal-header h4:before {
+    background: #6572b8;
+}
+
+.theme-purple .card .header h2 strong {
+    color: #6572b8;
+}
+
+.theme-purple .dtp div.dtp-date,
+.theme-purple .dtp div.dtp-time {
+    background: #8c99e0
+}
+
+.theme-purple .dtp table.dtp-picker-days tr td a.selected {
+    background: #8c99e0;
+    color: #fff
+}
+
+.theme-purple .dtp .year-picker-item:hover {
+    color: #8c99e0;
+}
+
+.theme-purple .dtp .year-picker-item.active {
+    color: #8c99e0;
+}
+
+.theme-purple .dtp .dtp-buttons button {
+    background-color: #8c99e0;
+}
+
+.theme-blue .menu > ul > li > ul.normal-sub > li a:hover, .theme-blue .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #004ea2;
+}
+
+.theme-blue.sidebar-collapse .navbar-collapse:before {
+    background-color: #00465a;
+}
+
+.theme-blue .btn-primary {
+    background: #004ea2;
+}
+
+    .theme-blue .btn-primary:active, .theme-blue .btn-primary:hover, .theme-blue .btn-primary:focus {
+        background: #004ea2;
+    }
+
+    .theme-blue .btn-primary.btn-simple {
+        border-color: #00465a;
+        color: #00465a;
+        background: transparent;
+    }
+
+.theme-blue .block-header h2 {
+    color: #fff;
+}
+
+    .theme-blue .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-blue section.content:before {
+    background-color: #004ea2;
+}
+
+.theme-blue .navbar {
+    background: #fff;
+}
+
+.theme-blue .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-blue .bars {
+    color: #fff;
+}
+
+.theme-blue .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+    .theme-blue .sidebar .menu .list li.active > a {
+        color: #bcd400;
+    }
+
+.theme-blue .sidebar .menu .list > li.active > a {
+    color: #222;
+    background-color: #bcd400;
+}
+
+.theme-blue .sidebar .menu .list a:hover {
+    color: #bcd400;
+}
+
+.theme-blue .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #00465a;
+}
+
+.theme-blue .nav-tabs .nav-link.active {
+    border: 1px solid #bcd400 !important;
+}
+
+.theme-blue .nav-tabs-simple > li > a:after {
+    background-color: #004ea2;
+}
+
+.theme-blue .card .header h2:before,
+.theme-blue .modal-header h4:before {
+    background: #004ea2;
+}
+
+.theme-blue .card .header h2 strong {
+    color: #00465a;
+}
+
+.theme-blue .dtp div.dtp-date, .theme-blue .dtp div.dtp-time {
+    background: #004ea2;
+}
+
+.theme-blue .dtp table.dtp-picker-days tr td a.selected {
+    background: #bcd400;
+    color: #fff;
+}
+
+.theme-blue .dtp .year-picker-item:hover {
+    color: #bcd400;
+}
+
+.theme-blue .dtp .year-picker-item.active {
+    color: #bcd400;
+}
+
+.theme-blue .dtp .dtp-buttons button {
+    background-color: #004ea2;
+}
+
+.theme-cyan .menu > ul > li > ul.normal-sub > li a:hover, .theme-cyan .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #01d8da;
+}
+
+.theme-cyan.sidebar-collapse .navbar-collapse:before {
+    background-color: #00cfd1;
+}
+
+.theme-cyan .btn-primary {
+    background: #00cfd1;
+}
+
+    .theme-cyan .btn-primary:active, .theme-cyan .btn-primary:hover, .theme-cyan .btn-primary:focus {
+        background: #01d8da;
+    }
+
+    .theme-cyan .btn-primary.btn-simple {
+        border-color: #00cfd1;
+        color: #00cfd1;
+        background: transparent;
+    }
+
+.theme-cyan .block-header h2 {
+    color: #fff;
+}
+
+    .theme-cyan .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-cyan section.content:before {
+    background-color: #01d8da;
+}
+
+.theme-cyan .navbar {
+    background: #fff;
+}
+
+.theme-cyan .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-cyan .bars {
+    color: #fff;
+}
+
+.theme-cyan .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+    .theme-cyan .sidebar .menu .list li.active > a {
+        color: #00cfd1;
+    }
+
+.theme-cyan .sidebar .menu .list > li.active > a {
+    color: #fff;
+    background-color: #00cfd1;
+}
+
+.theme-cyan .sidebar .menu .list a:hover {
+    color: #00cfd1;
+}
+
+.theme-cyan .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #00cfd1;
+}
+
+.theme-cyan .nav-tabs .nav-link.active {
+    border: 1px solid #00cfd1 !important;
+}
+
+.theme-cyan .nav-tabs-simple > li > a:after {
+    background-color: #01d8da;
+}
+
+.theme-cyan .card .header h2:before, .theme-cyan .modal-header h4:before {
+    background: #00cfd1;
+}
+
+.theme-cyan .card .header h2 strong {
+    color: #00cfd1;
+}
+
+.theme-cyan .dtp div.dtp-date,
+.theme-cyan .dtp div.dtp-time {
+    background: #01d8da
+}
+
+.theme-cyan .dtp table.dtp-picker-days tr td a.selected {
+    background: #01d8da;
+    color: #fff
+}
+
+.theme-cyan .dtp .year-picker-item:hover {
+    color: #01d8da;
+}
+
+.theme-cyan .dtp .year-picker-item.active {
+    color: #01d8da;
+}
+
+.theme-cyan .dtp .dtp-buttons button {
+    background-color: #01d8da;
+}
+
+.theme-green .menu > ul > li > ul.normal-sub > li a:hover, .theme-green .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #5cdb94;
+}
+
+.theme-green.sidebar-collapse .navbar-collapse:before {
+    background-color: #50d38a;
+}
+
+.theme-green .btn-primary {
+    background: #50d38a;
+}
+
+    .theme-green .btn-primary:active, .theme-green .btn-primary:hover, .theme-green .btn-primary:focus {
+        background: #5cdb94;
+    }
+
+    .theme-green .btn-primary.btn-simple {
+        border-color: #50d38a;
+        color: #50d38a;
+        background: transparent;
+    }
+
+.theme-green .block-header h2 {
+    color: #fff;
+}
+
+    .theme-green .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-green section.content:before {
+    background-color: #5cdb94;
+}
+
+.theme-green .navbar {
+    background: #fff;
+}
+
+.theme-green .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-green .bars {
+    color: #fff;
+}
+
+.theme-green .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+    .theme-green .sidebar .menu .list li.active > a {
+        color: #50d38a;
+    }
+
+.theme-green .sidebar .menu .list > li.active > a {
+    color: #fff;
+    background-color: #50d38a;
+}
+
+.theme-green .sidebar .menu .list a:hover {
+    color: #50d38a;
+}
+
+.theme-green .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #50d38a;
+}
+
+.theme-green .nav-tabs .nav-link.active {
+    border: 1px solid #50d38a !important;
+}
+
+.theme-green .nav-tabs-simple > li > a:after {
+    background-color: #5cdb94;
+}
+
+.theme-green .card .header h2:before, .theme-green .modal-header h4:before {
+    background: #50d38a;
+}
+
+.theme-green .card .header h2 strong {
+    color: #50d38a;
+}
+
+.theme-green .dtp div.dtp-date,
+.theme-green .dtp div.dtp-time {
+    background: #5cdb94
+}
+
+.theme-green .dtp table.dtp-picker-days tr td a.selected {
+    background: #5cdb94;
+    color: #fff
+}
+
+.theme-green .dtp .year-picker-item:hover {
+    color: #5cdb94;
+}
+
+.theme-green .dtp .year-picker-item.active {
+    color: #5cdb94;
+}
+
+.theme-green .dtp .dtp-buttons button {
+    background-color: #5cdb94;
+}
+
+.theme-orange .menu > ul > li > ul.normal-sub > li a:hover, .theme-orange .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #f96332;
+}
+
+.theme-orange.sidebar-collapse .navbar-collapse:before {
+    background-color: #f96332;
+}
+
+.theme-orange .btn-primary {
+    background: #f96332;
+}
+
+    .theme-orange .btn-primary:active, .theme-orange .btn-primary:hover, .theme-orange .btn-primary:focus {
+        background: #f96332;
+    }
+
+    .theme-orange .btn-primary.btn-simple {
+        border-color: #f96332;
+        color: #f96332;
+        background: transparent;
+    }
+
+.theme-orange .block-header h2 {
+    color: #fff;
+}
+
+    .theme-orange .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-orange section.content:before {
+    background-color: #f96332;
+}
+
+.theme-orange .navbar {
+    background: #fff;
+}
+
+.theme-orange .navbar {
+    background: #fff;
+}
+
+.theme-orange .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-orange .bars {
+    color: #fff;
+}
+
+.theme-orange .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+    .theme-orange .sidebar .menu .list li.active > a {
+        color: #f96332;
+    }
+
+.theme-orange .sidebar .menu .list > li.active > a {
+    color: #fff;
+    background-color: #f96332;
+}
+
+.theme-orange .sidebar .menu .list a:hover {
+    color: #f96332;
+}
+
+.theme-orange .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #f96332;
+}
+
+.theme-orange .nav-tabs .nav-link.active {
+    border: 1px solid #f96332 !important;
+}
+
+.theme-orange .nav-tabs-simple > li > a:after {
+    background-color: #f96332;
+}
+
+.theme-orange .card .header h2:before, .theme-orange .modal-header h4:before {
+    background: #f96332;
+}
+
+.theme-orange .card .header h2 strong {
+    color: #f96332;
+}
+
+.theme-orange .dtp div.dtp-date,
+.theme-orange .dtp div.dtp-time {
+    background: #f96332
+}
+
+.theme-orange .dtp table.dtp-picker-days tr td a.selected {
+    background: #f96332;
+    color: #fff
+}
+
+.theme-orange .dtp .year-picker-item:hover {
+    color: #f96332;
+}
+
+.theme-orange .dtp .year-picker-item.active {
+    color: #f96332;
+}
+
+.theme-orange .dtp .dtp-buttons button {
+    background-color: #f96332;
+}
+
+.theme-blush .menu > ul > li > ul.normal-sub > li a:hover, .theme-blush .menu > ul > li > ul > li > ul > li a:hover {
+    background-color: #ffbba4;
+}
+
+.theme-blush.sidebar-collapse .navbar-collapse:before {
+    background-color: #ffafbd;
+}
+
+.theme-blush .btn-primary {
+    background: #ffafbd;
+}
+
+    .theme-blush .btn-primary:active, .theme-blush .btn-primary:hover, .theme-blush .btn-primary:focus {
+        background: #ffbba4;
+    }
+
+    .theme-blush .btn-primary.btn-simple {
+        border-color: #ffafbd;
+        color: #ffafbd;
+        background: transparent;
+    }
+
+.theme-blush .block-header h2 {
+    color: #fff;
+}
+
+    .theme-blush .block-header h2 small {
+        color: #fff;
+    }
+
+.theme-blush section.content:before {
+    background-color: #ffbba4;
+}
+
+.theme-blush .navbar {
+    background: #fff;
+}
+
+.theme-blush .page-loader-wrapper {
+    opacity: 0.5;
+    background: #000;
+}
+
+.theme-blush .bars {
+    color: #fff;
+}
+
+.theme-blush .sidebar .menu .list li.active {
+    background-color: transparent;
+}
+
+    .theme-blush .sidebar .menu .list li.active > a {
+        color: #ffafbd;
+    }
+
+.theme-blush .sidebar .menu .list > li.active > a {
+    color: #fff;
+    background-color: #ffafbd;
+}
+
+.theme-blush .sidebar .menu .list a:hover {
+    color: #ffafbd;
+}
+
+.theme-blush .checkbox input[type="checkbox"]:checked + label::after {
+    border: 1px solid #ffafbd;
+}
+
+.theme-blush .nav-tabs .nav-link.active {
+    border: 1px solid #ffafbd !important;
+}
+
+.theme-blush .nav-tabs-simple > li > a:after {
+    background-color: #ffbba4;
+}
+
+.theme-blush .card .header h2:before, .theme-blush .modal-header h4:before {
+    background: #ffafbd;
+}
+
+.theme-blush .card .header h2 strong {
+    color: #ffafbd;
+}
+
+.theme-blush .dtp div.dtp-date,
+.theme-blush .dtp div.dtp-time {
+    background: #ffbba4
+}
+
+.theme-blush .dtp table.dtp-picker-days tr td a.selected {
+    background: #ffbba4;
+    color: #fff
+}
+
+.theme-blush .dtp .year-picker-item:hover {
+    color: #ffbba4;
+}
+
+.theme-blush .dtp .year-picker-item.active {
+    color: #ffbba4;
+}
+
+.theme-blush .dtp .dtp-buttons button {
+    background-color: #ffbba4;
+}

@@ -1,0 +1,46 @@
+<div class="row" ng-controller="mapFocusController">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://api.map.baidu.com/getscript?v=2.0&ak=dgEHcP88uc8TNolGapL9ymupTSAtIeZg&services=&t=20180629105709"></script>
+
+  </head>
+  <div id="container" style="width: 100%;height:680px;"></div>
+
+  <div class="modal fade" id="modal-chart" aria-hidden="true" data-backdrop="static">
+  	<div class="modal-dialog modal-lg">
+  		<div class="modal-content">
+  			<div class="modal-header">
+                <h4 class="title">数据展示</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+        	<div class="modal-body">
+        	<ng-form name="editForm">
+            	<div class="form-inline filter-option">
+            		
+                		<button class="btn btn-xs waves-effect btn-primary" ng-click="showAll()">分别展示</button> 
+                
+                	<div class="pull-right input-group-sm">
+                		<select ng-model="model.dataTypeX" ng-init="model.dataTypeX=DataTypes[9]" ng-options="DataType for DataType in DataTypes" ng-change="update()" >x轴</select>
+                    <div ng-repeat="item in DataTypes" >
+
+                      <!-- <div> 
+                      <input  class="text-center" type="checkbox"  ng-checked="defult()" ng-click="isSelected(item,$event)" text-nowrap>{{item}}
+                      </input>
+                      </div> -->
+
+                      <div > <input type="checkbox"  ng-checked="defult()" ng-click="isSelected(item,$event)" class="text-center"   text-nowrap>{{item}}</input></div>
+
+                  </div>
+                	</div>
+            	</div>
+            </ng-form>
+        		<div id="chartmain" style="width:600px; height: 400px;"></div>
+         	</div>
+    	</div>
+	</div>
+ </div>
+
+</div>
